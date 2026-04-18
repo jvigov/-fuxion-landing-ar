@@ -258,7 +258,7 @@ function goTo(url, producto, stock) {
   if (!stock) return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event:'click_comprar', producto, destino:url });
-  setTimeout(() => { window.location.href = url; }, 120);
+  setTimeout(function() { window.location.href = url; }, 0);
 }
 
 // Packs

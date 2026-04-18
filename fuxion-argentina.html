@@ -263,8 +263,15 @@ document.getElementById('f-tel').textContent = TEL;
 
 function goTo(url, producto, stock) {
   if (!stock) return;
-  gtag('event', 'conversion', {'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD'});
-  window.location.href = url;
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD',
+    'event_callback': function() {
+      window.location.href = url;
+    }
+  });
+  setTimeout(function() {
+    window.location.href = url;
+  }, 500);
 }
 
 // Packs

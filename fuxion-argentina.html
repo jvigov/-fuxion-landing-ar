@@ -129,7 +129,7 @@ const I={
 
 // ================================================================
 // ✏️  CAMBIÁ SOLO ESTE VALOR para actualizar TODOS los links
-const ALIAS = "Vigo";
+const ALIAS = "alvama";
 // ================================================================
 
 const TIENDA    = `https://ifuxion.com/${ALIAS}/enrollment/products`;
@@ -258,6 +258,7 @@ function goTo(url, producto, stock) {
   if (!stock) return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event:'click_comprar', producto, destino:url });
+  gtag('event', 'conversion', {'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD'});
   setTimeout(() => { window.location.href = url; }, 120);
 }
 

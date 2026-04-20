@@ -256,7 +256,7 @@ const PACKS = [
 
 <script>
 document.getElementById('nav-tienda').href = TIENDA;
-document.getElementById('hero-btn').href   = TIENDA;
+document.getElementById('hero-btn').onclick = function(){ goTo(TIENDA, 'Tienda General', true); };
 document.getElementById('wa-btn').href     = WA;
 document.getElementById('f-wa').href       = WA;
 document.getElementById('f-tel').textContent = TEL;

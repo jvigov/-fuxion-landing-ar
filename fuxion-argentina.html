@@ -332,12 +332,10 @@ function goTo(url, producto, stock) {
     'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD',
     'transaction_id': Date.now()
   });
-  // Abrir en nueva pestaña inmediatamente
-  window.open(url, '_blank');
-  // Ocultar overlay después de 2.5 segundos
+  // Redirigir después de 2 segundos — usuario ve el overlay
   setTimeout(function(){
-    document.getElementById('redirectOverlay').classList.remove('show');
-  }, 2500);
+    window.location.href = url;
+  }, 2000);
 }
 
 // Packs

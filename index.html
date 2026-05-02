@@ -109,6 +109,51 @@ nav{background:var(--w);border-bottom:3px solid var(--az);display:flex;align-ite
 footer{background:#0D1A26;color:rgba(255,255,255,.45);padding:20px 16px;font-size:11px;line-height:1.8;text-align:center}
 footer strong{color:rgba(255,255,255,.75)}
 footer a{color:#90CAF9}
+
+  /* OVERLAY REDIRECCION */
+  .redirect-overlay{
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:linear-gradient(145deg,#0A1628 0%,#0D3352 60%,#0A2040 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:9999;opacity:0;pointer-events:none;
+    transition:opacity .4s ease;gap:20px;
+  }
+  .redirect-overlay.show{opacity:1;pointer-events:all}
+  .redirect-brand{text-align:center;margin-bottom:8px}
+  .redirect-fx{
+    font-family:'Montserrat',sans-serif;font-size:36px;font-weight:900;
+    color:#fff;letter-spacing:3px;
+  }
+  .redirect-fx span{color:#00B5A3}
+  .redirect-tagline{
+    font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+    color:rgba(255,255,255,.45);margin-top:2px;
+  }
+  .redirect-spinner-wrap{
+    position:relative;width:72px;height:72px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .redirect-spinner{
+    position:absolute;
+    width:72px;height:72px;border-radius:50%;
+    border:3px solid rgba(255,255,255,.1);
+    border-top-color:#00B5A3;border-right-color:#2E7D32;
+    animation:spin .9s linear infinite;
+  }
+  .redirect-icon{font-size:28px;position:relative;z-index:1}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .redirect-text{
+    font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;
+    color:#fff;letter-spacing:.5px;
+  }
+  .redirect-dots{display:flex;gap:6px;margin-top:4px}
+  .redirect-dots span{
+    width:7px;height:7px;border-radius:50%;background:#00B5A3;
+    animation:dotPulse 1.2s ease infinite;
+  }
+  .redirect-dots span:nth-child(2){animation-delay:.2s;background:#2E7D32}
+  .redirect-dots span:nth-child(3){animation-delay:.4s;background:#90CAF9}
+  @keyframes dotPulse{0%,100%{transform:scale(.6);opacity:.4}50%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
@@ -244,6 +289,23 @@ const PACKS = [
   <p><a id="f-wa">WhatsApp: <span id="f-tel"></span></a></p>
 </footer>
 
+
+<!-- OVERLAY REDIRECCION -->
+<div class="redirect-overlay" id="redirectOverlay">
+  <div class="redirect-brand">
+    <div class="redirect-fx">FU<span>X</span>ION</div>
+    <div class="redirect-tagline">Mejoramos tu vida</div>
+  </div>
+  <div class="redirect-spinner-wrap">
+    <div class="redirect-spinner"></div>
+    <div class="redirect-icon">🛒</div>
+  </div>
+  <div class="redirect-text">Redirigéndote a la tienda oficial para tu compra</div>
+  <div class="redirect-dots">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+
 <!-- WA FLOTANTE -->
 <a class="wa" id="wa-btn" title="WhatsApp" target="_blank">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -263,11 +325,19 @@ document.getElementById('f-tel').textContent = TEL;
 
 function goTo(url, producto, stock) {
   if (!stock) return;
+  // Mostrar overlay
+  document.getElementById('redirectOverlay').classList.add('show');
+  // Disparar conversión
   gtag('event', 'conversion', {
     'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD',
     'transaction_id': Date.now()
   });
-  window.location.href = url;
+  // Abrir en nueva pestaña inmediatamente
+  window.open(url, '_blank');
+  // Ocultar overlay después de 2.5 segundos
+  setTimeout(function(){
+    document.getElementById('redirectOverlay').classList.remove('show');
+  }, 2500);
 }
 
 // Packs

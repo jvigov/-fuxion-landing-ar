@@ -333,9 +333,7 @@ function goTo(url, producto, stock) {
     'transaction_id': Date.now()
   });
   // Redirigir después de 1 segundo
-  setTimeout(function(){
-    window.location.href = url;
-  }, 300);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){window.location.href=url;});});
 }
 
 // Packs
@@ -396,3 +394,4 @@ filtersEl.addEventListener('click', ev => {
 </script>
 </body>
 </html>
+

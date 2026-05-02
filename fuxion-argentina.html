@@ -326,19 +326,16 @@ document.getElementById('f-tel').textContent = TEL;
 function goTo(url, producto, stock) {
   if (!stock) return;
   // Mostrar overlay
-  var overlay = document.getElementById('redirectOverlay');
-  overlay.classList.add('show');
+  document.getElementById('redirectOverlay').classList.add('show');
   // Disparar conversión
   gtag('event', 'conversion', {
     'send_to': 'AW-18097076762/ePzdCJOi-J0cEJr0rbVD',
     'transaction_id': Date.now()
   });
-  // Abrir ifuxion en nueva pestaña
-  window.open(url, '_blank');
-  // Ocultar overlay cuando ifuxion ya cargó (3.5 segundos)
+  // Redirigir después de 1 segundo
   setTimeout(function(){
-    overlay.classList.remove('show');
-  }, 3500);
+    window.location.href = url;
+  }, 1000);
 }
 
 // Packs

@@ -414,6 +414,11 @@ filtersEl.addEventListener('click', ev => {
   btn.classList.add('active');
   renderGrid(btn.dataset.cat);
 });
+
+// Ocultar overlay al volver con el botón atrás
+window.addEventListener('pageshow', function(){
+  document.getElementById('redirectOverlay').classList.remove('show');
+});
 </script>
 </body>
 </html>
